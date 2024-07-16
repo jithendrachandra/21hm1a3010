@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Average Calculator</title>
+</head>
+<body>
+    <h1>Average Calculator</h1>
+    <label for="numberId">Number ID:</label>
+    <input type="text" id="numberId" name="numberId">
+    <button onclick="fetchNumbers()">Fetch Numbers</button>
+    <h2>Numbers:</h2>
+    <pre id="numbers"></pre>
+    <h2>Average:</h2>
+    <pre id="average"></pre>
+
+    <script>
+        async function fetchNumbers() {
+            const numberId = document.getElementById('numberId').value;
+            const response = await fetch(`/numbers/${numberId}`);
+            const data = await response.json();
+            document.getElementById('numbers').innerText = JSON.stringify(data.numbers, null, 2);
+            document.getElementById('average').innerText = data.average;
+        }
+    </script>
+</body>
+</html>
